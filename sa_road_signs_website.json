@@ -1,0 +1,55 @@
+﻿{
+    "categories_summary":  {
+                               "Control":  84,
+                               "Command":  84,
+                               "Warning":  126,
+                               "Prohibition":  84,
+                               "Information":  44
+                           },
+    "version":  "2.0",
+    "data":  [
+                 {
+                     "id":  1,
+                     "description":  "Stop Sign",
+                     "sign_code":  "R1",
+                     "filename":  "image1.png",
+                     "category":  "Control",
+                     "image_id":  "image1"
+                 },
+                 {
+                     "id":  2,
+                     "description":  "Stop Sign",
+                     "sign_code":  "R1.1",
+                     "filename":  "image2.png",
+                     "category":  "Control",
+                     "image_id":  "image2"
+                 },
+                 {
+                     "id":  3,
+                     "description":  "Stop/Yield",
+                     "sign_code":  "R1.2",
+                     "filename":  "image3.png",
+                     "category":  "Control",
+                     "image_id":  "image3"
+                 },
+                 {
+                     "id":  4,
+                     "description":  "3-Way Stop",
+                     "sign_code":  "R1.3",
+                     "filename":  "image4.png",
+                     "category":  "Control",
+                     "image_id":  "image4"
+                 },
+                 {
+                     "id":  5,
+                     "description":  "4-Way Stop",
+                     "sign_code":  "R1.4",
+                     "filename":  "image5.png",
+                     "category":  "Control",
+                     "image_id":  "image5"
+                 }
+             ],
+    "total_signs":  422,
+    "generated_date":  "2025-11-26T16:35:28",
+    "project":  "South African Road Signs Catalog"
+}

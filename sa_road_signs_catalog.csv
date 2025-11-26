@@ -1,0 +1,11 @@
+﻿id,image_id,filename,sign_code,description,category
+1,image1,image1.png,R1,Stop Sign,Control
+2,image2,image2.png,R1.1,Stop Sign,Control
+3,image3,image3.png,R1.2,Stop/Yield,Control
+4,image4,image4.png,R1.3,3-Way Stop,Control
+5,image5,image5.png,R1.4,4-Way Stop,Control
+6,image6,image6.png,R1.5,Stop/Go,Control
+7,image7,image7.png,R2,Yield,Control
+8,image8,image8.png,R2.1,Yield to Pedestrians,Control
+9,image9,image9.png,R2.2,Yield at Mini-Circle,Control
+10,image10,image10.png,R3,No Entry,Control
