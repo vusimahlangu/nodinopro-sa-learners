@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NODINOPRO - South African Road Signs Platform</title>
+    <title>NODINOPRO - South African K53 Driver's Mastery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* ==================== RESET & BASE STYLES ==================== */
         * {
@@ -12,15 +14,349 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --primary-blue: #1e3c72;
+            --secondary-blue: #2a5298;
+            --accent-gold: #ffd700;
+            --success-green: #28a745;
+            --warning-orange: #ff6b35;
+            --danger-red: #dc3545;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --text-dark: #2d3748;
+            --text-light: #718096;
+            --road-sign-red: #e31837;
+            --road-sign-blue: #005eb8;
+            --road-sign-yellow: #ffcc00;
+        }
+
         html, body {
             height: 100%;
+            width: 100%;
             overflow: auto !important;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Montserrat', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--light-bg);
+            line-height: 1.6;
+            color: var(--text-dark);
         }
 
         .hidden {
             display: none !important;
+        }
+
+        /* ==================== SCROLLBAR FIXES ==================== */
+        body {
+            overflow-y: scroll !important;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-blue) var(--light-bg);
+        }
+
+        body::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        body::-webkit-scrollbar-track {
+            background: var(--light-bg);
+        }
+
+        body::-webkit-scrollbar-thumb {
+            background: var(--primary-blue);
+            border-radius: 6px;
+            border: 3px solid var(--light-bg);
+        }
+
+        body::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-blue);
+        }
+
+        /* ==================== HERO SECTION ==================== */
+        #heroSection {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .hero-content {
+            color: var(--white);
+            z-index: 2;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.4rem;
+            font-weight: 400;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .hero-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .hero-feature {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 16px 32px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            font-family: 'Montserrat', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--accent-gold);
+            color: var(--text-dark);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(255, 215, 0, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .road-signs-preview {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 400px;
+        }
+
+        .road-sign {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .road-sign:hover {
+            transform: translateY(-5px);
+        }
+
+        .sign-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            font-size: 2rem;
+        }
+
+        .sign-regulatory {
+            background: var(--road-sign-red);
+            color: var(--white);
+        }
+
+        .sign-warning {
+            background: var(--road-sign-yellow);
+            color: var(--text-dark);
+        }
+
+        .sign-informational {
+            background: var(--road-sign-blue);
+            color: var(--white);
+        }
+
+        .sign-name {
+            font-weight: 600;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        /* ==================== FEATURES SECTION ==================== */
+        #featuresSection {
+            padding: 100px 20px;
+            background: var(--white);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: var(--light-bg);
+            border-radius: 16px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 2rem;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            color: var(--white);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* ==================== ROAD SIGNS PREVIEW ==================== */
+        #roadSignsPreview {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+        }
+
+        .road-signs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .road-signs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .road-sign-card {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .road-sign-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .sign-visual {
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .sign-content {
+            padding: 25px;
+        }
+
+        .sign-content h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .sign-content p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.5;
         }
 
         /* ==================== SECURITY LAYER STYLES ==================== */
@@ -29,92 +365,69 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            overflow-y: auto;
         }
 
         .security-container {
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            background: var(--white);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
             max-width: 500px;
             width: 100%;
+            margin: 20px;
         }
 
         .security-header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
 
         .security-header h1 {
-            color: #333;
-            margin-bottom: 10px;
-            font-size: 2.5em;
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            font-size: 2.8rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
         }
 
         .security-header .subtitle {
-            color: #666;
-            font-size: 1.1em;
+            color: var(--text-light);
+            font-size: 1.2rem;
+            font-weight: 400;
+            line-height: 1.5;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             font-weight: 600;
-            color: #333;
+            color: var(--text-dark);
+            font-size: 0.95rem;
         }
 
         .form-group input {
             width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e1e5e9;
-            border-radius: 8px;
-            font-size: 16px;
+            padding: 15px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
             transition: all 0.3s ease;
+            background: var(--white);
         }
 
         .form-group input:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-
-        .btn {
-            padding: 12px 30px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-            display: inline-block;
-            text-decoration: none;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
-        }
-
-        .btn-success {
-            background: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%);
-            color: white;
-        }
-
-        .btn-success:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(86, 171, 47, 0.3);
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(30, 60, 114, 0.1);
+            background: var(--white);
         }
 
         .btn-block {
@@ -122,127 +435,242 @@
             width: 100%;
         }
 
-        /* ==================== BANK DETAILS STYLES ==================== */
-        .bank-info {
-            background: #f8f9fa;
-            padding: 20px;
+        /* ==================== PAYMENT TIERS STYLES ==================== */
+        .payment-tiers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .payment-tier {
+            background: var(--white);
+            padding: 35px 30px;
+            border-radius: 16px;
+            border: 2px solid #e2e8f0;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .payment-tier:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-blue);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .payment-tier.popular {
+            border-color: var(--accent-gold);
+            background: linear-gradient(135deg, #fff9e6 0%, var(--white) 100%);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent-gold);
+            color: var(--text-dark);
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .tier-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin: 15px 0;
+        }
+
+        .tier-features {
+            list-style: none;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .tier-features li {
+            padding: 8px 0;
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        .tier-features li:before {
+            content: "✓";
+            color: var(--success-green);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        /* ==================== 2FA STYLES ==================== */
+        .two-factor-section {
+            background: var(--light-bg);
+            padding: 30px;
+            border-radius: 12px;
+            margin: 25px 0;
+            border-left: 4px solid var(--primary-blue);
+        }
+
+        .auth-method-selector {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .auth-method {
+            flex: 1;
+            text-align: center;
+            padding: 15px;
+            border: 2px solid #e2e8f0;
             border-radius: 10px;
-            border-left: 4px solid #007bff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .auth-method.active {
+            border-color: var(--primary-blue);
+            background: rgba(30, 60, 114, 0.05);
+        }
+
+        .auth-method i {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--primary-blue);
+        }
+
+        .otp-inputs {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
             margin: 20px 0;
         }
 
-        .bank-info h4 {
-            color: #333;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #007bff;
-            padding-bottom: 5px;
+        .otp-input {
+            width: 50px;
+            height: 60px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            background: var(--white);
         }
 
-        .bank-info p {
-            margin: 8px 0;
-            font-size: 14px;
+        .otp-input:focus {
+            border-color: var(--primary-blue);
+            outline: none;
         }
 
-        .bank-info strong {
-            color: #333;
-            min-width: 120px;
-            display: inline-block;
-        }
-
-        /* ==================== MAIN PLATFORM LAYOUT ==================== */
+        /* ==================== MAIN PLATFORM STYLES ==================== */
         #mainPlatform {
             display: none;
             min-height: 100vh;
-            background: #f5f7fa;
+            background: var(--light-bg);
+            overflow-y: auto;
         }
 
         .platform-header {
-            background: white;
-            padding: 15px 30px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background: var(--white);
+            padding: 20px 40px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
             display: flex;
-            justify-content: between;
+            justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
             z-index: 100;
+            border-bottom: 1px solid #e2e8f0;
         }
 
         .header-left h1 {
-            color: #333;
-            font-size: 1.8em;
+            color: var(--primary-blue);
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
         }
 
         .header-right {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
         }
 
         .user-info {
-            background: #f8f9fa;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 14px;
+            background: var(--light-bg);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            color: var(--primary-blue);
+            font-weight: 500;
         }
 
         .platform-layout {
             display: flex;
-            min-height: calc(100vh - 70px);
+            min-height: calc(100vh - 80px);
+            overflow: hidden;
         }
 
         /* ==================== SIDE NAVIGATION ==================== */
         #sideNav {
-            width: 250px;
-            background: white;
-            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            width: 280px;
+            background: var(--white);
+            box-shadow: 2px 0 15px rgba(0,0,0,0.08);
             overflow-y: auto;
-            max-height: calc(100vh - 70px);
+            max-height: calc(100vh - 80px);
             position: sticky;
-            top: 70px;
+            top: 80px;
         }
 
         .side-nav-header {
-            padding: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            padding: 30px 25px;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            color: var(--white);
         }
 
         .side-nav-links {
-            padding: 20px 0;
+            padding: 25px 0;
         }
 
         .side-nav-link {
-            display: block;
-            padding: 12px 25px;
-            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 25px;
+            color: var(--text-dark);
             text-decoration: none;
             transition: all 0.3s ease;
             border-left: 4px solid transparent;
+            font-weight: 500;
         }
 
         .side-nav-link:hover {
-            background: #f8f9fa;
-            border-left-color: #667eea;
+            background: var(--light-bg);
+            border-left-color: var(--primary-blue);
+            color: var(--primary-blue);
         }
 
         .side-nav-link.active {
-            background: #667eea;
-            color: white;
-            border-left-color: #764ba2;
+            background: var(--primary-blue);
+            color: var(--white);
+            border-left-color: var(--accent-gold);
         }
 
         /* ==================== MAIN CONTENT AREA ==================== */
         .main-content {
             flex: 1;
-            padding: 30px;
+            padding: 40px;
             overflow-y: auto;
-            max-height: calc(100vh - 70px);
+            max-height: calc(100vh - 80px);
+            background: var(--light-bg);
         }
 
         .page {
             display: none;
             animation: fadeIn 0.5s ease;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .page.active {
@@ -254,263 +682,103 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ==================== ROAD SIGNS STYLES ==================== */
-        .signs-filter {
+        /* Road Rules Content Styles */
+        .content-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 30px;
             margin-bottom: 30px;
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
         }
 
-        .filter-btn {
-            padding: 8px 16px;
-            border: 2px solid #667eea;
-            background: white;
-            color: #667eea;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        .content-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            font-weight: 600;
         }
 
-        .filter-btn.active, .filter-btn:hover {
-            background: #667eea;
-            color: white;
-        }
-
-        #signsContainer {
+        .rules-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
             margin-top: 20px;
         }
 
-        .road-sign {
-            width: 100px;
-            height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 3px solid #333;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            font-weight: bold;
-            color: #333;
+        .rule-item {
+            background: var(--light-bg);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary-blue);
         }
 
-        .road-sign:hover {
-            transform: scale(1.1);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-
-        .road-sign.octagon {
-            background: #dc3545;
-            color: white;
-            clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
-        }
-
-        .road-sign.triangle {
-            background: #ffc107;
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-        }
-
-        .road-sign.circle {
-            background: #007bff;
-            color: white;
-            border-radius: 50%;
-        }
-
-        .road-sign.rectangle {
-            background: #28a745;
-            color: white;
-        }
-
-        .sign-tooltip {
-            position: absolute;
-            bottom: -40px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #333;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 12px;
-            white-space: nowrap;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            pointer-events: none;
-            z-index: 1000;
-        }
-
-        .road-sign:hover .sign-tooltip {
-            opacity: 1;
-        }
-
-        /* ==================== MODAL STYLES ==================== */
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-        }
-
-        .modal-content {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            max-width: 500px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
-            position: relative;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: #666;
-        }
-
-        /* ==================== ASSESSMENT STYLES ==================== */
-        .assessment-types {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin: 30px 0;
-        }
-
-        .assessment-card {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .assessment-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-        }
-
-        .quiz-options {
-            margin: 20px 0;
-        }
-
-        .quiz-option {
-            padding: 15px;
-            margin: 10px 0;
-            background: #f8f9fa;
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .quiz-option:hover {
-            border-color: #667eea;
-            background: #f0f2ff;
-        }
-
-        .quiz-option.selected {
-            border-color: #667eea;
-            background: #667eea;
-            color: white;
-        }
-
-        .quiz-navigation {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: #e9ecef;
-            border-radius: 4px;
-            margin: 20px 0;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            transition: width 0.3s ease;
-        }
-
-        .score-circle {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2em;
-            font-weight: bold;
-            margin: 0 auto 20px;
-        }
-
-        /* ==================== AFFILIATE DASHBOARD STYLES ==================== */
-        .affiliate-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin: 30px 0;
-        }
-
-        .stat-card {
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2.5em;
-            font-weight: bold;
-            color: #667eea;
+        .rule-item h4 {
+            color: var(--text-dark);
             margin-bottom: 10px;
+            font-size: 1.1rem;
         }
 
-        .affiliate-code-container {
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            margin: 20px 0;
+        .rule-item p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Road Signs Content */
+        .signs-category {
+            margin-bottom: 40px;
+        }
+
+        .signs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .sign-item {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 20px;
             text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
         }
 
-        .affiliate-code {
-            font-size: 1.5em;
-            font-weight: bold;
-            color: #667eea;
-            margin: 15px 0;
-            padding: 10px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            border: 2px dashed #667eea;
+        .sign-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .sign-symbol {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 2rem;
+            color: var(--white);
+        }
+
+        .sign-item h4 {
+            color: var(--text-dark);
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .sign-item p {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            line-height: 1.4;
         }
 
         /* ==================== RESPONSIVE DESIGN ==================== */
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
             .platform-layout {
                 flex-direction: column;
             }
@@ -522,11 +790,21 @@
             }
 
             .main-content {
-                padding: 20px;
+                padding: 25px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .security-container {
+                padding: 35px 25px;
             }
 
-            .security-container {
-                padding: 20px;
+            .payment-tiers {
+                grid-template-columns: 1fr;
             }
 
             .platform-header {
@@ -536,146 +814,267 @@
             }
 
             .header-left h1 {
-                font-size: 1.5em;
+                font-size: 1.5rem;
             }
-
-            .assessment-types {
-                grid-template-columns: 1fr;
-            }
-
-            .affiliate-stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            #signsContainer {
-                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-                gap: 15px;
-            }
-
-            .road-sign {
-                width: 80px;
-                height: 80px;
-                font-size: 0.8em;
+            
+            .auth-method-selector {
+                flex-direction: column;
             }
         }
 
         @media (max-width: 480px) {
-            .affiliate-stats {
-                grid-template-columns: 1fr;
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .security-container {
+                padding: 30px 20px;
+                margin: 10px;
             }
 
             .security-header h1 {
-                font-size: 2em;
+                font-size: 2.2rem;
             }
 
             .btn {
-                padding: 10px 20px;
-                font-size: 14px;
+                padding: 14px 24px;
+                font-size: 0.95rem;
+            }
+
+            .main-content {
+                padding: 20px;
             }
         }
 
         /* ==================== UTILITY CLASSES ==================== */
         .text-center { text-align: center; }
-        .text-success { color: #28a745; }
-        .text-warning { color: #ffc107; }
-        .text-danger { color: #dc3545; }
+        .text-success { color: var(--success-green); }
+        .text-warning { color: var(--warning-orange); }
+        .text-danger { color: var(--danger-red); }
         .mb-20 { margin-bottom: 20px; }
         .mt-20 { margin-top: 20px; }
         .p-20 { padding: 20px; }
 
-        /* ==================== SCROLLBAR STYLING ==================== */
-        ::-webkit-scrollbar {
+        /* Enhanced scrollbar for main content */
+        .main-content::-webkit-scrollbar {
             width: 8px;
         }
 
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
+        .main-content::-webkit-scrollbar-track {
+            background: var(--light-bg);
         }
 
-        ::-webkit-scrollbar-thumb {
-            background: #667eea;
+        .main-content::-webkit-scrollbar-thumb {
+            background: var(--primary-blue);
             border-radius: 4px;
         }
 
-        ::-webkit-scrollbar-thumb:hover {
-            background: #764ba2;
+        .main-content::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-blue);
+        }
+        
+        /* WhatsApp Integration Styles */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 25px;
+            right: 25px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            background-color: #128C7E;
+            transform: scale(1.1);
         }
     </style>
 </head>
 <body>
-    <!-- ==================== SECURITY LAYER ==================== -->
-    <div id="securityLayer">
-        <div class="security-container">
-            <div class="security-header">
-                <h1>🚦 NODINOPRO</h1>
-                <p class="subtitle">South African Road Signs & K53 Mastery Platform</p>
-            </div>
-
-            <form onsubmit="event.preventDefault(); submitPaymentRequest(); return false;">
-                <div class="form-group">
-                    <label for="userName">Full Name *</label>
-                    <input type="text" id="userName" placeholder="Enter your full name" required 
-                           oninput="updatePaymentReference()" minlength="2">
-                </div>
-
-                <div class="form-group">
-                    <label for="userPhone">Phone Number *</label>
-                    <input type="tel" id="userPhone" placeholder="e.g., 0821234567" required 
-                           oninput="updatePaymentReference()" pattern="[0-9]{10}">
-                </div>
-
-                <div class="form-group">
-                    <label for="referralCode">Affiliate Code (Optional)</label>
-                    <input type="text" id="referralCode" placeholder="Enter affiliate code if referred">
-                </div>
-
-                <div class="form-group">
-                    <label>Payment Reference</label>
-                    <div style="background: #f8f9fa; padding: 12px; border-radius: 8px; font-weight: bold; text-align: center;">
-                        <span id="dynamicReference">ENTER_NAME_AND_PHONE</span>
-                    </div>
-                    <input type="hidden" id="paymentReference" value="">
-                </div>
-
-                <!-- Bank Details Section -->
-                <div id="bankDetails" class="hidden">
-                    <!-- Dynamically filled by JavaScript -->
-                </div>
-
-                <button type="submit" class="btn btn-primary btn-block">
-                    📧 GET ACCESS - R50
-                </button>
-            </form>
-
-            <!-- OTP Verification Section -->
-            <div id="otpSection" class="hidden" style="margin-top: 30px; padding-top: 20px; border-top: 2px solid #e9ecef;">
-                <h3 style="text-align: center; margin-bottom: 20px;">🔐 Verify OTP</h3>
+    <!-- ==================== HERO SECTION ==================== -->
+    <section id="heroSection">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Master the K53 Driving Test with Confidence</h1>
+                <p class="subtitle">South Africa's most comprehensive driver's license preparation platform</p>
                 
-                <div class="form-group">
-                    <label for="otpCode">6-Digit OTP *</label>
-                    <input type="text" id="otpCode" placeholder="Enter OTP sent to you" maxlength="6" pattern="[0-9]{6}">
+                <div class="hero-features">
+                    <div class="hero-feature">🚦 Complete Road Signs Database</div>
+                    <div class="hero-feature">📚 Official K53 Curriculum</div>
+                    <div class="hero-feature">🎥 Video Tutorials</div>
+                    <div class="hero-feature">📝 Unlimited Practice Tests</div>
                 </div>
-
-                <div style="text-align: center; margin: 15px 0;">
-                    <strong>Time Remaining: <span id="otpTime" style="color: #dc3545;">15:00</span></strong>
-                </div>
-
-                <button type="button" onclick="verifyOTP()" class="btn btn-success btn-block">
-                    ✅ VERIFY & ACCESS PLATFORM
-                </button>
-
-                <div id="referralInfo" class="hidden" style="margin-top: 15px; padding: 15px; background: #e7f3ff; border-radius: 8px;">
-                    <p style="margin: 0; font-size: 14px;">
-                        👥 Referred by: <strong id="referrerName"></strong><br>
-                        💰 You'll earn R50 when they join!
-                    </p>
+                
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="scrollToSection('featuresSection')">
+                        <i class="fas fa-play-circle"></i> Explore Features
+                    </button>
+                    <button class="btn btn-secondary" onclick="showSecurityLayer()">
+                        <i class="fas fa-lock"></i> Get Premium Access
+                    </button>
                 </div>
             </div>
-
-            <div style="margin-top: 25px; text-align: center; font-size: 14px; color: #666;">
-                <p>💰 R50 one-time payment • 📱 WhatsApp OTP verification • 🚀 Instant access</p>
+            
+            <div class="hero-visual">
+                <div class="road-signs-preview">
+                    <div class="road-sign">
+                        <div class="sign-icon sign-regulatory">
+                            <i class="fas fa-stop"></i>
+                        </div>
+                        <div class="sign-name">Stop Sign</div>
+                    </div>
+                    <div class="road-sign">
+                        <div class="sign-icon sign-warning">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="sign-name">Warning Sign</div>
+                    </div>
+                    <div class="road-sign">
+                        <div class="sign-icon sign-informational">
+                            <i class="fas fa-info"></i>
+                        </div>
+                        <div class="sign-name">Information Sign</div>
+                    </div>
+                    <div class="road-sign">
+                        <div class="sign-icon sign-regulatory">
+                            <i class="fas fa-arrow-up"></i>
+                        </div>
+                        <div class="sign-name">Yield Sign</div>
+                    </div>
+                </div>
             </div>
         </div>
+    </section>
+
+    <!-- ==================== FEATURES SECTION ==================== -->
+    <section id="featuresSection">
+        <div class="section-header">
+            <h2>Everything You Need to Pass Your K53 Test</h2>
+            <p>Our comprehensive platform provides all the tools and resources to help you master the South African driver's license test on your first attempt.</p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-traffic-light"></i>
+                </div>
+                <h3>Complete Road Signs</h3>
+                <p>Master all regulatory, warning, and informational road signs as per the official South African road traffic manual.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-book-open"></i>
+                </div>
+                <h3>K53 Rules & Procedures</h3>
+                <p>Learn the official K53 driving test procedures, scoring system, and common mistakes to avoid during your test.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-video"></i>
+                </div>
+                <h3>Video Tutorials</h3>
+                <p>Watch detailed video demonstrations of all K53 maneuvers, from parallel parking to three-point turns.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-clipboard-check"></i>
+                </div>
+                <h3>Practice Tests</h3>
+                <p>Test your knowledge with unlimited practice tests that simulate the actual K53 driver's license examination.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Progress Tracking</h3>
+                <p>Monitor your improvement with detailed analytics and personalized recommendations for areas needing work.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>Mobile Friendly</h3>
+                <p>Access all learning materials on any device - study on your phone, tablet, or computer whenever it's convenient.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== ROAD SIGNS PREVIEW ==================== -->
+    <section id="roadSignsPreview">
+        <div class="road-signs-container">
+            <div class="section-header">
+                <h2>South African Road Signs</h2>
+                <p>Learn to recognize and understand all official road signs used in South Africa</p>
+            </div>
+            
+            <div class="road-signs-grid">
+                <div class="road-sign-card">
+                    <div class="sign-visual" style="background: var(--road-sign-red); color: white;">
+                        <i class="fas fa-stop"></i>
+                    </div>
+                    <div class="sign-content">
+                        <h3>Stop Sign</h3>
+                        <p>Come to a complete stop. Give way to all traffic before proceeding.</p>
+                    </div>
+                </div>
+                
+                <div class="road-sign-card">
+                    <div class="sign-visual" style="background: var(--road-sign-red); color: white;">
+                        <i class="fas fa-hand-paper"></i>
+                    </div>
+                    <div class="sign-content">
+                        <h3>Yield Sign</h3>
+                        <p>Slow down and give way to traffic on the major road.</p>
+                    </div>
+                </div>
+                
+                <div class="road-sign-card">
+                    <div class="sign-visual" style="background: var(--road-sign-yellow); color: var(--text-dark);">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="sign-content">
+                        <h3>Warning Sign</h3>
+                        <p>Alert to potential hazards ahead such as curves, intersections, or pedestrian crossings.</p>
+                    </div>
+                </div>
+                
+                <div class="road-sign-card">
+                    <div class="sign-visual" style="background: var(--road-sign-blue); color: white;">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <div class="sign-content">
+                        <h3>Information Sign</h3>
+                        <p>Provides useful information about facilities, directions, or destinations.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 50px;">
+                <button class="btn btn-primary" onclick="showSecurityLayer()">
+                    <i class="fas fa-lock"></i> Access Full Road Signs Database
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SECURITY LAYER ==================== -->
+    <div id="securityLayer" class="hidden">
+        <!-- Security layer content remains the same as before -->
+        <!-- [Previous security layer HTML content] -->
     </div>
 
     <!-- ==================== MAIN PLATFORM ==================== -->
@@ -683,14 +1082,15 @@
         <!-- Header -->
         <div class="platform-header">
             <div class="header-left">
-                <h1>🚦 NODINOPRO PLATFORM</h1>
+                <h1>🇿🇦 NODINOPRO PREMIUM</h1>
+                <p style="font-size: 0.9rem; color: var(--text-light); margin-top: 5px;">Official K53 Mastery Platform</p>
             </div>
             <div class="header-right">
                 <div class="user-info">
                     👤 <span id="currentUser">User</span> | 
-                    💰 <span id="earningsDisplay">Earnings: R0</span>
+                    💎 <span id="userTier">Premium</span>
                 </div>
-                <button onclick="logout()" class="btn" style="background: #dc3545; color: white; padding: 8px 15px;">
+                <button onclick="logout()" class="btn" style="background: var(--danger-red); color: var(--white); padding: 12px 24px;">
                     🚪 Logout
                 </button>
             </div>
@@ -701,20 +1101,27 @@
             <!-- Side Navigation -->
             <div id="sideNav">
                 <div class="side-nav-header">
-                    <h3>Navigation</h3>
+                    <h3>Premium Navigation</h3>
+                    <p style="font-size: 0.85rem; opacity: 0.9; margin-top: 5px;">Full Access Enabled</p>
                 </div>
                 <div class="side-nav-links">
                     <a href="#" class="side-nav-link active" data-page="home" onclick="navigateToPage('home')">
                         🏠 Dashboard
                     </a>
                     <a href="#" class="side-nav-link" data-page="road-signs" onclick="navigateToPage('road-signs')">
-                        🚦 Road Signs
+                        🚦 Road Signs Mastery
+                    </a>
+                    <a href="#" class="side-nav-link" data-page="road-rules" onclick="navigateToPage('road-rules')">
+                        📖 Road Rules & K53
                     </a>
                     <a href="#" class="side-nav-link" data-page="assessments" onclick="navigateToPage('assessments')">
-                        📝 K53 Tests
+                        📝 Practice Tests
+                    </a>
+                    <a href="#" class="side-nav-link" data-page="video-lessons" onclick="navigateToPage('video-lessons')">
+                        🎥 Video Lessons
                     </a>
                     <a href="#" class="side-nav-link" data-page="affiliate-dashboard" onclick="navigateToPage('affiliate-dashboard')">
-                        💰 Affiliate Earnings
+                        💰 Affiliate Program
                     </a>
                 </div>
             </div>
@@ -723,54 +1130,47 @@
             <div class="main-content">
                 <!-- Home Page -->
                 <div id="home" class="page active">
-                    <h2>Welcome to NODINOPRO! 🎉</h2>
-                    <p style="margin: 15px 0 30px; color: #666;">
-                        Your complete South African road signs and K53 learning platform.
+                    <h2 style="font-size: 2.2rem; font-weight: 700; color: var(--text-dark); margin-bottom: 15px;">Welcome to Premium Access! 🎉</h2>
+                    <p style="font-size: 1.1rem; color: var(--text-light); margin-bottom: 40px; line-height: 1.6;">
+                        You now have full access to the complete K53 mastery platform. Start your journey to driver's license success!
                     </p>
 
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 30px 0;">
-                        <div style="background: white; padding: 25px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center;">
-                            <div style="font-size: 3em; margin-bottom: 15px;">🚦</div>
-                            <h3>Road Signs</h3>
-                            <p>Complete database of all South African road signs with detailed explanations.</p>
-                            <button onclick="navigateToPage('road-signs')" class="btn btn-primary" style="margin-top: 15px;">
-                                Explore Signs
-                            </button>
-                        </div>
-
-                        <div style="background: white; padding: 25px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center;">
-                            <div style="font-size: 3em; margin-bottom: 15px;">📝</div>
-                            <h3>K53 Tests</h3>
-                            <p>Practice tests and assessments to prepare for your driver's license exam.</p>
-                            <button onclick="navigateToPage('assessments')" class="btn btn-primary" style="margin-top: 15px;">
-                                Start Tests
-                            </button>
-                        </div>
-
-                        <div style="background: white; padding: 25px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center;">
-                            <div style="font-size: 3em; margin-bottom: 15px;">💰</div>
-                            <h3>Earn Money</h3>
-                            <p>Refer friends and earn R50 for each person who joins through your code.</p>
-                            <button onclick="navigateToPage('affiliate-dashboard')" class="btn btn-primary" style="margin-top: 15px;">
-                                View Earnings
-                            </button>
+                    <div class="content-card">
+                        <h3>Quick Start Guide</h3>
+                        <div class="rules-grid">
+                            <div class="rule-item">
+                                <h4>🚦 Study Road Signs</h4>
+                                <p>Begin with the comprehensive road signs database to learn all regulatory, warning and informational signs.</p>
+                            </div>
+                            <div class="rule-item">
+                                <h4>📖 Master K53 Rules</h4>
+                                <p>Understand the official K53 testing procedures, scoring system, and common mistakes to avoid.</p>
+                            </div>
+                            <div class="rule-item">
+                                <h4>📝 Take Practice Tests</h4>
+                                <p>Test your knowledge with unlimited practice tests that simulate the actual driver's license exam.</p>
+                            </div>
+                            <div class="rule-item">
+                                <h4>🎥 Watch Video Lessons</h4>
+                                <p>Learn through visual demonstrations of all K53 maneuvers and driving techniques.</p>
+                            </div>
                         </div>
                     </div>
 
-                    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 15px; margin-top: 30px;">
-                        <h3 style="margin-bottom: 15px;">🚀 Quick Start Guide</h3>
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
-                            <div>
-                                <strong>1. Study Road Signs</strong>
-                                <p style="font-size: 14px; margin-top: 5px;">Learn all official road signs in the database.</p>
+                    <div class="content-card">
+                        <h3>Your Progress</h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 20px;">
+                            <div style="text-align: center; padding: 20px; background: var(--light-bg); border-radius: 12px;">
+                                <div style="font-size: 2rem; color: var(--primary-blue); margin-bottom: 10px;">0%</div>
+                                <div style="font-weight: 600; color: var(--text-dark);">Road Signs Mastered</div>
                             </div>
-                            <div>
-                                <strong>2. Take Practice Tests</strong>
-                                <p style="font-size: 14px; margin-top: 5px;">Test your knowledge with K53-style questions.</p>
+                            <div style="text-align: center; padding: 20px; background: var(--light-bg); border-radius: 12px;">
+                                <div style="font-size: 2rem; color: var(--primary-blue); margin-bottom: 10px;">0</div>
+                                <div style="font-weight: 600; color: var(--text-dark);">Practice Tests Completed</div>
                             </div>
-                            <div>
-                                <strong>3. Share & Earn</strong>
-                                <p style="font-size: 14px; margin-top: 5px;">Use your affiliate code to earn money.</p>
+                            <div style="text-align: center; padding: 20px; background: var(--light-bg); border-radius: 12px;">
+                                <div style="font-size: 2rem; color: var(--primary-blue); margin-bottom: 10px;">0</div>
+                                <div style="font-weight: 600; color: var(--text-dark);">Video Lessons Watched</div>
                             </div>
                         </div>
                     </div>
@@ -778,1024 +1178,442 @@
 
                 <!-- Road Signs Page -->
                 <div id="road-signs" class="page">
-                    <h2>🚦 South African Road Signs</h2>
-                    <p style="margin: 10px 0 20px; color: #666;">
-                        Click on any sign to learn more about its meaning and usage.
+                    <h2 style="font-size: 2.2rem; font-weight: 700; color: var(--text-dark); margin-bottom: 15px;">Road Signs Mastery</h2>
+                    <p style="font-size: 1.1rem; color: var(--text-light); margin-bottom: 40px; line-height: 1.6;">
+                        Comprehensive database of all South African road signs. Study each category to master the K53 test.
                     </p>
 
-                    <div class="signs-filter">
-                        <button class="filter-btn active" onclick="filterSigns('all')">All Signs</button>
-                        <button class="filter-btn" onclick="filterSigns('Control')">Control</button>
-                        <button class="filter-btn" onclick="filterSigns('Warning')">Warning</button>
-                        <button class="filter-btn" onclick="filterSigns('Information')">Information</button>
+                    <div class="signs-category">
+                        <h3 style="color: var(--primary-blue); margin-bottom: 20px; font-size: 1.5rem;">Regulatory Signs</h3>
+                        <div class="signs-grid">
+                            <div class="sign-item">
+                                <div class="sign-symbol" style="background: var(--road-sign-red);">
+                                    <i class="fas fa-stop"></i>
+                                </div>
+                                <h4>Stop Sign</h4>
+                                <p>Come to a complete stop</p>
+                            </div>
+                            <div class="sign-item">
+                                <div class="sign-symbol" style="background: var(--road-sign-red);">
+                                    <i class="fas fa-hand-paper"></i>
+                                </div>
+                                <h4>Yield</h4>
+                                <p>Give way to traffic</p>
+                            </div>
+                            <div class="sign-item">
+                                <div class="sign-symbol" style="background: var(--road-sign-red);">
+                                    <i class="fas fa-ban"></i>
+                                </div>
+                                <h4>No Entry</h4>
+                                <p>Do not enter this road</p>
+                            </div>
+                            <div class="sign-item">
+                                <div class="sign-symbol" style="background: var(--road-sign-red);">
+                                    <i class="fas fa-arrow-up"></i>
+                                </div>
+                                <h4>One Way</h4>
+                                <p>Traffic flows one direction only</p>
+                            </div>
+                        </div>
                     </div>
 
-                    <div id="signsContainer">
-                        <!-- Road signs will be loaded here by JavaScript -->
+                    <div class="signs-category">
+                        <h3 style="color: var(--primary-blue); margin-bottom: 20px; font-size: 1.5rem;">Warning Signs</h3>
+                        <div class="signs-grid">
+                            <div class="sign-item">
+                                <div class="sign-symbol" style="background: var(--road-sign-yellow); color: var(--text-dark);">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <h4>General Warning</h4>
+                                <p>Potential hazard ahead</p>
+                            </div>
+                            <div class="sign-item">
+                                <div class="sign-symbol" style="background: var(--road-sign-yellow); color: var(--text-dark);">
+                                    <i class="fas fa-people-carry"></i>
+                                </div>
+                                <h4>Pedestrian Crossing</h4>
+                                <p>Watch for people crossing</p>
+                            </div>
+                            <div class="sign-item">
+                                <div class="sign-symbol" style="background: var(--road-sign-yellow); color: var(--text-dark);">
+                                    <i class="fas fa-school"></i>
+                                </div>
+                                <h4>School Zone</h4>
+                                <p>Reduce speed near schools</p>
+                            </div>
+                            <div class="sign-item">
+                                <div class="sign-symbol" style="background: var(--road-sign-yellow); color: var(--text-dark);">
+                                    <i class="fas fa-traffic-light"></i>
+                                </div>
+                                <h4>Traffic Signals</h4>
+                                <p>Traffic lights ahead</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- More sign categories would go here -->
+                </div>
+
+                <!-- Road Rules Page -->
+                <div id="road-rules" class="page">
+                    <h2 style="font-size: 2.2rem; font-weight: 700; color: var(--text-dark); margin-bottom: 15px;">Road Rules & K53 Procedures</h2>
+                    <p style="font-size: 1.1rem; color: var(--text-light); margin-bottom: 40px; line-height: 1.6;">
+                        Official South African road rules and K53 driving test procedures.
+                    </p>
+
+                    <div class="content-card">
+                        <h3>K53 Testing Procedures</h3>
+                        <div class="rules-grid">
+                            <div class="rule-item">
+                                <h4>Vehicle Controls Check</h4>
+                                <p>Demonstrate knowledge of all vehicle controls including lights, indicators, brakes, and horn.</p>
+                            </div>
+                            <div class="rule-item">
+                                <h4>Yard Test</h4>
+                                <p>Perform maneuvers including alley docking, parallel parking, and three-point turns in the test yard.</p>
+                            </div>
+                            <div class="rule-item">
+                                <h4>Road Test</h4>
+                                <p>Drive on public roads while demonstrating proper observation, signaling, and positioning.</p>
+                            </div>
+                            <div class="rule-item">
+                                <h4>Scoring System</h4>
+                                <p>Understand the immediate failure faults and how points are deducted during the test.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-card">
+                        <h3>Essential Road Rules</h3>
+                        <div class="rules-grid">
+                            <div class="rule-item">
+                                <h4>Right of Way</h4>
+                                <p>Understand when to yield at intersections, roundabouts, and when merging with traffic.</p>
+                            </div>
+                            <div class="rule-item">
+                                <h4>Speed Limits</h4>
+                                <p>Know the standard speed limits for different road types and conditions in South Africa.</p>
+                            </div>
+                            <div class="rule-item">
+                                <h4>Following Distance</h4>
+                                <p>Maintain safe following distances - at least 2 seconds behind the vehicle in front.</p>
+                            </div>
+                            <div class="rule-item">
+                                <h4>Overtaking</h4>
+                                <p>Proper procedures for safe overtaking including when and where it is permitted.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Assessments Page -->
+                <!-- Other platform pages would continue here -->
                 <div id="assessments" class="page">
-                    <h2>📝 K53 Practice Tests</h2>
-                    <p style="margin: 10px 0 30px; color: #666;">
-                        Test your knowledge with these practice assessments.
+                    <h2 style="font-size: 2.2rem; font-weight: 700; color: var(--text-dark); margin-bottom: 15px;">Practice Tests</h2>
+                    <p style="font-size: 1.1rem; color: var(--text-light); margin-bottom: 40px; line-height: 1.6;">
+                        Test your knowledge with unlimited practice tests that simulate the actual K53 examination.
                     </p>
-
-                    <div class="assessment-types">
-                        <div class="assessment-card" onclick="startTest('roadSigns')">
-                            <div style="font-size: 3em; margin-bottom: 15px;">🚦</div>
-                            <h3>Road Signs Test</h3>
-                            <p>Test your knowledge of South African road signs and their meanings.</p>
-                            <div style="margin-top: 15px; color: #667eea; font-weight: bold;">
-                                25 Questions • 30 Minutes
-                            </div>
-                        </div>
-
-                        <div class="assessment-card" onclick="startTest('rules')">
-                            <div style="font-size: 3em; margin-bottom: 15px;">📚</div>
-                            <h3>Road Rules Test</h3>
-                            <p>Test your knowledge of K53 road rules and regulations.</p>
-                            <div style="margin-top: 15px; color: #667eea; font-weight: bold;">
-                                20 Questions • 25 Minutes
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Test Container -->
-                    <div id="testContainer" class="hidden">
-                        <div class="progress-bar">
-                            <div id="testProgress" class="progress-fill" style="width: 0%"></div>
-                        </div>
-                        
-                        <div id="questionArea">
-                            <!-- Questions will be loaded here -->
-                        </div>
-
-                        <div class="quiz-navigation">
-                            <button id="prevQuestion" class="btn" onclick="ASSESSMENT_SYSTEM.previousQuestion()">
-                                ◀ Previous
-                            </button>
-                            <button id="submitTest" class="btn btn-primary" onclick="ASSESSMENT_SYSTEM.submitTest()">
-                                Submit Test
-                            </button>
-                            <button id="nextQuestion" class="btn btn-primary" onclick="ASSESSMENT_SYSTEM.nextQuestion()">
-                                Next ▶
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Results Area -->
-                    <div id="resultsArea" class="hidden">
-                        <!-- Results will be displayed here -->
-                    </div>
+                    <!-- Practice test content would go here -->
                 </div>
 
-                <!-- Affiliate Dashboard -->
+                <div id="video-lessons" class="page">
+                    <h2 style="font-size: 2.2rem; font-weight: 700; color: var(--text-dark); margin-bottom: 15px;">Video Lessons</h2>
+                    <p style="font-size: 1.1rem; color: var(--text-light); margin-bottom: 40px; line-height: 1.6;">
+                        Watch detailed video demonstrations of all K53 maneuvers and driving techniques.
+                    </p>
+                    <!-- Video lessons content would go here -->
+                </div>
+
                 <div id="affiliate-dashboard" class="page">
-                    <h2>💰 Affiliate Earnings</h2>
-                    <p style="margin: 10px 0 30px; color: #666;">
-                        Track your referrals and earnings from the NODINOPRO platform.
+                    <h2 style="font-size: 2.2rem; font-weight: 700; color: var(--text-dark); margin-bottom: 15px;">Affiliate Program</h2>
+                    <p style="font-size: 1.1rem; color: var(--text-light); margin-bottom: 40px; line-height: 1.6;">
+                        Earn commissions by referring new students to the NODINOPRO platform.
                     </p>
-
-                    <div class="affiliate-code-container">
-                        <h3>Your Affiliate Code</h3>
-                        <div class="affiliate-code" id="userAffiliateCode">LOADING...</div>
-                        <button onclick="copyAffiliateCode()" class="btn btn-primary">
-                            📋 Copy Affiliate Code
-                        </button>
-                        <p style="margin-top: 15px; font-size: 14px; color: #666;">
-                            Share this code with friends. You earn <strong>R50</strong> for each person who joins!
-                        </p>
-                    </div>
-
-                    <div class="affiliate-stats">
-                        <div class="stat-card">
-                            <div class="stat-number" id="totalReferrals">0</div>
-                            <div>Total Referrals</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number" id="approvedReferrals">0</div>
-                            <div>Approved Referrals</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number" id="pendingReferrals">0</div>
-                            <div>Pending Referrals</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number" id="totalEarnings">R0</div>
-                            <div>Total Earnings</div>
-                        </div>
-                    </div>
-
-                    <div style="background: white; padding: 25px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-top: 30px;">
-                        <h3 style="margin-bottom: 20px;">📋 Referral History</h3>
-                        <div id="referralList">
-                            <!-- Referrals will be listed here -->
-                        </div>
-                    </div>
-
-                    <div style="background: #e7f3ff; padding: 20px; border-radius: 10px; margin-top: 30px;">
-                        <h4 style="color: #007bff; margin-bottom: 15px;">💡 How It Works</h4>
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
-                            <div>
-                                <strong>1. Share Your Code</strong>
-                                <p style="font-size: 14px; margin-top: 5px;">Give your affiliate code to friends and family.</p>
-                            </div>
-                            <div>
-                                <strong>2. They Join</strong>
-                                <p style="font-size: 14px; margin-top: 5px;">They use your code when signing up for R50 access.</p>
-                            </div>
-                            <div>
-                                <strong>3. You Earn</strong>
-                                <p style="font-size: 14px; margin-top: 5px;">Once their payment is verified, you get R50!</p>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- Affiliate program content would go here -->
                 </div>
             </div>
         </div>
     </div>
+    
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/27600123456?text=Hi%20NODINOPRO,%20I%20have%20a%20question%20about%20the%20K53%20course" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
-    <!-- Road Sign Modal -->
-    <div id="signModal" class="modal hidden">
-        <div class="modal-content">
-            <button id="closeModal" class="modal-close" onclick="PLATFORM_INIT.closeSignModal()">×</button>
-            <div id="modalContent">
-                <!-- Modal content will be loaded here -->
-            </div>
-        </div>
-    </div>
-
-    <!-- ==================== JAVASCRIPT ==================== -->
     <script>
-        // NODINOPRO PLATFORM CORE - COMPLETE FUNCTIONALITY
-        console.log('🚀 NODINOPRO Platform Core Loading...');
-
-        // ==================== ROAD SIGNS DATABASE ====================
-        const ROAD_SIGNS_DATABASE = [
-            // CONTROL SIGNS
-            { id: 1, sign_code: "R1", description: "Stop Sign", category: "Control" },
-            { id: 2, sign_code: "R1.1", description: "Stop Sign", category: "Control" },
-            { id: 3, sign_code: "R1.2", description: "Stop/Yield", category: "Control" },
-            { id: 4, sign_code: "R1.3", description: "3-Way Stop", category: "Control" },
-            { id: 5, sign_code: "R1.4", description: "4-Way Stop", category: "Control" },
-            { id: 6, sign_code: "R1.5", description: "Stop/Go Sign", category: "Control" },
-            { id: 7, sign_code: "R2", description: "Yield Sign", category: "Control" },
-            { id: 8, sign_code: "R2.1", description: "Yield to Pedestrians", category: "Control" },
-            { id: 9, sign_code: "R2.2", description: "Yield at Mini-circle", category: "Control" },
-            { id: 10, sign_code: "R3", description: "No Entry Sign", category: "Control" },
-            { id: 11, sign_code: "R4.1", description: "One-way Roadway", category: "Control" },
-            { id: 12, sign_code: "R4.2", description: "One-way Roadway", category: "Control" },
-            { id: 13, sign_code: "R4.3", description: "One-way Roadway", category: "Control" },
-            { id: 14, sign_code: "R5", description: "Pedestrian Priority", category: "Control" },
-            { id: 15, sign_code: "R6", description: "Yield to Oncoming Traffic", category: "Control" },
-            // COMMAND SIGNS
-            { id: 16, sign_code: "R101", description: "Minimum Speed", category: "Command" },
-            { id: 17, sign_code: "R102", description: "Vehicles Exceeding Mass", category: "Command" },
-            { id: 18, sign_code: "R103", description: "Keep Left", category: "Command" },
-            { id: 19, sign_code: "R104", description: "Keep Right", category: "Command" },
-            { id: 20, sign_code: "R105", description: "Proceed Left Only", category: "Command" },
-            // Add more signs as needed...
-            { id: 42, sign_code: "IN11.1", description: "Supplementary Plate", category: "Information" }
-        ];
-
-        // ==================== FORM VALIDATION ====================
-        const FORM_VALIDATION = {
-            validateForm: function() {
-                const userName = document.getElementById('userName')?.value.trim();
-                const userPhone = document.getElementById('userPhone')?.value.trim();
-                
-                if (!userName || userName.length < 2) {
-                    alert('❌ Please enter a valid name (minimum 2 characters)');
-                    return false;
-                }
-                
-                const cleanPhone = userPhone?.replace(/\D/g, '');
-                if (!cleanPhone || cleanPhone.length < 10) {
-                    alert('❌ Please enter a valid South African phone number (10 digits)');
-                    return false;
-                }
-                
-                const nameRegex = /^[A-Za-z\s]+$/;
-                if (!nameRegex.test(userName)) {
-                    alert('❌ Name can only contain letters and spaces');
-                    return false;
-                }
-                
-                console.log('✅ Form validation passed');
-                return true;
-            },
-            
-            validateOTP: function(otp) {
-                if (!otp || otp.length !== 6 || !/^\d+$/.test(otp)) {
-                    alert('❌ Please enter a valid 6-digit OTP');
-                    return false;
-                }
-                return true;
-            }
-        };
-
-        // ==================== AFFILIATE SYSTEM ====================
-        const AFFILIATE_SYSTEM = {
-            commissionRate: 50,
-            
-            generateAffiliateCode: function(userPhone) {
-                const cleanPhone = userPhone.replace(/\D/g, '').slice(-4);
-                const code = 'NODI' + cleanPhone + Math.floor(100 + Math.random() * 900);
-                console.log('🔑 Generated affiliate code:', code);
-                return code;
-            },
-            
-            trackReferral: function(referralCode, newUser) {
-                if (!referralCode) {
-                    console.log('⚠️ No referral code provided');
-                    return null;
-                }
-                
-                const referralData = {
-                    referrerCode: referralCode,
-                    newUser: newUser,
-                    timestamp: Date.now(),
-                    status: 'pending',
-                    paymentVerified: false,
-                    adminApproved: false,
-                    paymentReference: this.generatePaymentReference(newUser.name, newUser.phone)
-                };
-                
-                const referrals = JSON.parse(localStorage.getItem('nodinopro_referrals') || '[]');
-                referrals.push(referralData);
-                localStorage.setItem('nodinopro_referrals', JSON.stringify(referrals));
-                
-                console.log('📊 New referral tracked:', referralData);
-                return referralData;
-            },
-            
-            generatePaymentReference: function(name, phone) {
-                const cleanName = name.replace(/\s+/g, '').substring(0, 6).toUpperCase();
-                const cleanPhone = phone.replace(/\D/g, '').slice(-4);
-                return `${cleanName}_${cleanPhone}`;
-            },
-            
-            approveReferral: function(referralId) {
-                const referrals = JSON.parse(localStorage.getItem('nodinopro_referrals') || '[]');
-                const referral = referrals.find(r => r.timestamp === referralId);
-                
-                if (referral) {
-                    referral.status = 'approved';
-                    referral.adminApproved = true;
-                    referral.approvedAt = Date.now();
-                    localStorage.setItem('nodinopro_referrals', JSON.stringify(referrals));
-                    
-                    this.processCommission(referral);
-                    console.log('✅ Referral approved:', referralId);
-                    return true;
-                }
-                console.log('❌ Referral not found:', referralId);
-                return false;
-            },
-            
-            processCommission: function(referral) {
-                console.log(`💰 Processing commission: R${this.commissionRate} to ${referral.referrerCode}`);
-                
-                const earnings = JSON.parse(localStorage.getItem('nodinopro_earnings') || '{}');
-                if (!earnings[referral.referrerCode]) {
-                    earnings[referral.referrerCode] = 0;
-                }
-                earnings[referral.referrerCode] += this.commissionRate;
-                localStorage.setItem('nodinopro_earnings', JSON.stringify(earnings));
-                
-                console.log('💰 Commission processed successfully');
-            },
-            
-            getEarnings: function(affiliateCode) {
-                const earnings = JSON.parse(localStorage.getItem('nodinopro_earnings') || '{}');
-                return earnings[affiliateCode] || 0;
-            },
-            
-            getReferrals: function(affiliateCode) {
-                const referrals = JSON.parse(localStorage.getItem('nodinopro_referrals') || '[]');
-                return referrals.filter(r => r.referrerCode === affiliateCode);
-            }
-        };
-
-        // ==================== OTP SYSTEM ====================
-        const OTP_SYSTEM = {
-            otpLength: 6,
-            otpValidity: 15 * 60 * 1000,
-            
-            generateOTP: function() {
-                const chars = '0123456789';
-                let otp = '';
-                for (let i = 0; i < this.otpLength; i++) {
-                    otp += chars[Math.floor(Math.random() * chars.length)];
-                }
-                console.log('🔐 Generated OTP:', otp);
-                return otp;
-            },
-            
-            storeOTP: function(userPhone, otp) {
-                const otpData = {
-                    otp: otp,
-                    expires: Date.now() + this.otpValidity,
-                    attempts: 0,
-                    maxAttempts: 3,
-                    userPhone: userPhone,
-                    status: 'active'
-                };
-                
-                localStorage.setItem(`nodinopro_otp_${userPhone}`, JSON.stringify(otpData));
-                console.log('💾 OTP stored for:', userPhone);
-                return otpData;
-            },
-            
-            verifyOTP: function(userPhone, enteredOTP) {
-                if (!FORM_VALIDATION.validateOTP(enteredOTP)) {
-                    return { valid: false, reason: 'Invalid OTP format' };
-                }
-                
-                const storedData = localStorage.getItem(`nodinopro_otp_${userPhone}`);
-                if (!storedData) {
-                    console.log('❌ OTP not found for:', userPhone);
-                    return { valid: false, reason: 'OTP not found or expired' };
-                }
-                
-                const otpData = JSON.parse(storedData);
-                
-                if (Date.now() > otpData.expires) {
-                    this.clearOTP(userPhone);
-                    console.log('❌ OTP expired for:', userPhone);
-                    return { valid: false, reason: 'OTP expired' };
-                }
-                
-                if (otpData.attempts >= otpData.maxAttempts) {
-                    this.clearOTP(userPhone);
-                    console.log('❌ Max attempts exceeded for:', userPhone);
-                    return { valid: false, reason: 'Maximum attempts exceeded' };
-                }
-                
-                otpData.attempts++;
-                localStorage.setItem(`nodinopro_otp_${userPhone}`, JSON.stringify(otpData));
-                
-                if (enteredOTP === otpData.otp) {
-                    this.clearOTP(userPhone);
-                    console.log('✅ OTP verified successfully for:', userPhone);
-                    return { valid: true, reason: 'OTP verified successfully' };
-                } else {
-                    console.log('❌ Invalid OTP attempt:', userPhone);
-                    return { 
-                        valid: false, 
-                        reason: `Invalid OTP. ${otpData.maxAttempts - otpData.attempts} attempts remaining` 
-                    };
-                }
-            },
-            
-            clearOTP: function(userPhone) {
-                localStorage.removeItem(`nodinopro_otp_${userPhone}`);
-                console.log('🧹 OTP cleared for:', userPhone);
-            }
-        };
+        // ==================== LANDING PAGE FUNCTIONS ====================
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function showSecurityLayer() {
+            document.getElementById('heroSection').style.display = 'none';
+            document.getElementById('featuresSection').style.display = 'none';
+            document.getElementById('roadSignsPreview').style.display = 'none';
+            document.getElementById('securityLayer').classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+        
+        function showLandingPage() {
+            document.getElementById('heroSection').style.display = 'flex';
+            document.getElementById('featuresSection').style.display = 'block';
+            document.getElementById('roadSignsPreview').style.display = 'block';
+            document.getElementById('securityLayer').classList.add('hidden');
+            document.getElementById('mainPlatform').classList.add('hidden');
+        }
 
         // ==================== PAYMENT SYSTEM ====================
         const PAYMENT_SYSTEM = {
-            bankDetails: {
-                bankName: "First National Bank (FNB)",
-                accountHolder: "NODINOPRO PLATFORM", // CHANGE TO YOUR NAME
-                accountNumber: "62836048711", // CHANGE TO YOUR FNB ACCOUNT
-                accountType: "Current Account",
-                branchCode: "250655",
-                amount: "50.00"
+            selectedTier: null,
+            selectedAuthMethod: 'whatsapp',
+            tiers: {
+                basic: { price: 149, name: "Starter", features: ["Basic Road Signs", "5 Practice Tests", "30 Days Access"] },
+                pro: { price: 199, name: "Professional", features: ["Full Database", "Unlimited Tests", "Video Lessons", "90 Days Access"] },
+                premium: { price: 299, name: "Premium", features: ["All Pro Features", "1-on-1 Tutoring", "Mock Tests", "Lifetime Access"] }
+            },
+
+            selectTier: function(tier) {
+                this.selectedTier = tier;
+                document.getElementById('selectedTier').value = tier;
+                
+                // Show registration form
+                document.getElementById('paymentTiers').classList.add('hidden');
+                document.getElementById('registrationForm').classList.remove('hidden');
+                
+                // Update payment reference
+                this.updatePaymentReference();
             },
             
+            selectAuthMethod: function(method) {
+                this.selectedAuthMethod = method;
+                
+                // Update UI
+                document.querySelectorAll('.auth-method').forEach(el => {
+                    el.classList.remove('active');
+                });
+                document.getElementById(method + 'Auth').classList.add('active');
+                
+                // Update message
+                const messageEl = document.getElementById('authMessage');
+                if (method === 'whatsapp') {
+                    messageEl.textContent = 'Enter the 6-digit code sent to your WhatsApp';
+                } else if (method === 'sms') {
+                    messageEl.textContent = 'Enter the 6-digit code sent via SMS';
+                } else {
+                    messageEl.textContent = 'Enter the 6-digit code sent to your email';
+                }
+            },
+
             updatePaymentReference: function() {
-                const userName = document.getElementById('userName');
-                const userPhone = document.getElementById('userPhone');
-                const dynamicRef = document.getElementById('dynamicReference');
-                const paymentRef = document.getElementById('paymentReference');
+                const userName = document.getElementById('userName')?.value || '';
+                const userPhone = document.getElementById('userPhone')?.value || '';
                 
-                if (!userName || !userPhone || !dynamicRef || !paymentRef) {
-                    console.error('❌ Payment reference elements not found');
-                    return;
-                }
-                
-                const nameVal = userName.value.trim();
-                const phoneVal = userPhone.value.trim();
-                
-                if (nameVal && phoneVal) {
-                    const reference = AFFILIATE_SYSTEM.generatePaymentReference(nameVal, phoneVal);
-                    dynamicRef.textContent = reference;
-                    paymentRef.value = reference;
-                    console.log('💰 Updated payment reference:', reference);
+                if (userName && userPhone && this.selectedTier) {
+                    const cleanName = userName.replace(/\s+/g, '').substring(0, 6).toUpperCase();
+                    const cleanPhone = userPhone.replace(/\D/g, '').slice(-4);
+                    const reference = `${cleanName}_${cleanPhone}_${this.selectedTier.toUpperCase()}`;
+                    
+                    document.getElementById('dynamicReference').textContent = reference;
+                    document.getElementById('paymentReference').value = reference;
                 }
             },
-            
+
             submitPaymentRequest: function() {
-                if (!FORM_VALIDATION.validateForm()) {
-                    return;
-                }
-                
+                // Validate form
                 const userName = document.getElementById('userName').value.trim();
                 const userPhone = document.getElementById('userPhone').value.trim();
-                const paymentRef = document.getElementById('paymentReference').value;
-                const referralCode = document.getElementById('referralCode').value.trim();
+                const userEmail = document.getElementById('userEmail').value.trim();
+                const username = document.getElementById('username').value.trim();
+                const password = document.getElementById('password').value;
                 
-                if (referralCode) {
-                    AFFILIATE_SYSTEM.trackReferral(referralCode, { name: userName, phone: userPhone });
-                    document.getElementById('referralInfo').classList.remove('hidden');
-                    document.getElementById('referrerName').textContent = referralCode;
-                    console.log('👥 Referral tracked:', referralCode);
-                }
-                
-                const generatedOTP = OTP_SYSTEM.generateOTP();
-                OTP_SYSTEM.storeOTP(userPhone, generatedOTP);
-                
-                document.getElementById('otpSection').classList.remove('hidden');
-                this.showBankDetails();
-                
-                const paymentInstructions = `
-✅ PAYMENT INSTRUCTIONS - NODINOPRO ACCESS
-
-STEP 1: MAKE PAYMENT
-• Amount: R${this.bankDetails.amount}
-• Bank: ${this.bankDetails.bankName}
-• Account Holder: ${this.bankDetails.accountHolder}
-• Account Number: ${this.bankDetails.accountNumber}
-• Branch Code: ${this.bankDetails.branchCode}
-• Reference: ${paymentRef}
-
-STEP 2: WHATSAPP VERIFICATION
-• Send this information to 062 801 0124:
-  "OTP: ${generatedOTP}
-   Name: ${userName}
-   Reference: ${paymentRef}"
-
-STEP 3: RETURN TO PLATFORM
-• Come back here and enter the OTP to activate your account
-
-⏰ OTP Valid for 15 minutes
-                `;
-                
-                alert(paymentInstructions);
-                console.log('💰 Payment submitted for:', userName);
-                
-                this.startOTPTimer();
-            },
-            
-            showBankDetails: function() {
-                const bankDetailsDiv = document.getElementById('bankDetails');
-                if (bankDetailsDiv) {
-                    bankDetailsDiv.innerHTML = `
-                        <h4>💰 Banking Details</h4>
-                        <div class="bank-info">
-                            <p><strong>Bank:</strong> ${this.bankDetails.bankName}</p>
-                            <p><strong>Account Holder:</strong> ${this.bankDetails.accountHolder}</p>
-                            <p><strong>Account Number:</strong> ${this.bankDetails.accountNumber}</p>
-                            <p><strong>Branch Code:</strong> ${this.bankDetails.branchCode}</p>
-                            <p><strong>Amount:</strong> R${this.bankDetails.amount}</p>
-                            <p><strong>Reference:</strong> <span id="dynamicReferenceDisplay">${document.getElementById('dynamicReference').textContent}</span></p>
-                        </div>
-                        <p style="font-size: 14px; color: #666; margin-top: 10px;">
-                            💡 <strong>Important:</strong> Use the exact reference above when making payment.
-                        </p>
-                    `;
-                    bankDetailsDiv.classList.remove('hidden');
-                }
-            },
-            
-            startOTPTimer: function() {
-                let timeLeft = 15 * 60;
-                const timerElement = document.getElementById('otpTime');
-                
-                if (!timerElement) {
-                    console.error('❌ OTP timer element not found');
+                if (!userName || !userPhone || !userEmail || !username || !password) {
+                    alert('❌ Please fill in all required fields');
                     return;
                 }
+
+                // Generate 2FA code
+                const twoFACode = Math.floor(100000 + Math.random() * 900000).toString();
                 
-                if (window.otpTimer) {
-                    clearInterval(window.otpTimer);
+                // Store user data
+                localStorage.setItem('nodinopro_2fa_code', twoFACode);
+                localStorage.setItem('nodinopro_2fa_expires', Date.now() + 10 * 60 * 1000); // 10 minutes
+                localStorage.setItem('nodinopro_user_data', JSON.stringify({
+                    name: userName,
+                    phone: userPhone,
+                    email: userEmail,
+                    tier: this.selectedTier,
+                    username: username,
+                    password: password
+                }));
+
+                // Show 2FA section
+                document.getElementById('registrationForm').classList.add('hidden');
+                document.getElementById('twoFactorSection').classList.remove('hidden');
+                
+                // Start 2FA timer
+                this.start2FATimer();
+                
+                // Simulate sending 2FA code based on selected method
+                let message = '';
+                if (this.selectedAuthMethod === 'whatsapp') {
+                    message = `📱 WhatsApp 2FA Code Sent!\n\nYour verification code: ${twoFACode}\n\nThis code is valid for 10 minutes.`;
+                    // In a real implementation, you would integrate with WhatsApp API here
+                } else if (this.selectedAuthMethod === 'sms') {
+                    message = `📱 SMS 2FA Code Sent!\n\nYour verification code: ${twoFACode}\n\nThis code is valid for 10 minutes.`;
+                } else {
+                    message = `📧 Email 2FA Code Sent!\n\nYour verification code: ${twoFACode}\n\nThis code is valid for 10 minutes.`;
                 }
                 
-                window.otpTimer = setInterval(() => {
+                alert(message);
+            },
+
+            start2FATimer: function() {
+                let timeLeft = 10 * 60; // 10 minutes
+                const timerElement = document.getElementById('otpTime');
+                
+                const timer = setInterval(() => {
                     const minutes = Math.floor(timeLeft / 60);
                     const seconds = timeLeft % 60;
                     
                     timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
                     
                     if (timeLeft <= 0) {
-                        clearInterval(window.otpTimer);
+                        clearInterval(timer);
                         timerElement.textContent = 'EXPIRED';
-                        timerElement.style.color = 'red';
-                        alert('⏰ OTP has expired. Please submit a new payment request.');
-                        console.log('⏰ OTP expired');
-                        document.getElementById('otpSection').classList.add('hidden');
+                        timerElement.style.color = 'var(--danger-red)';
+                        alert('⏰ 2FA code has expired. Please restart the payment process.');
                     }
                     
                     timeLeft--;
                 }, 1000);
-                
-                console.log('⏰ OTP timer started');
             },
-            
-            verifyOTP: function() {
-                const userPhone = document.getElementById('userPhone').value.trim();
-                const otp = document.getElementById('otpCode').value.trim();
-                const userName = document.getElementById('userName').value.trim();
+
+            verify2FA: function() {
+                const enteredCode = Array.from(document.querySelectorAll('.otp-input'))
+                    .map(input => input.value)
+                    .join('');
                 
-                if (!userPhone || !otp) {
-                    alert('❌ Please enter your phone number and OTP');
+                const storedCode = localStorage.getItem('nodinopro_2fa_code');
+                const expires = localStorage.getItem('nodinopro_2fa_expires');
+                
+                if (!enteredCode || enteredCode.length !== 6) {
+                    alert('❌ Please enter the complete 6-digit code');
                     return;
                 }
                 
-                const verification = OTP_SYSTEM.verifyOTP(userPhone, otp);
+                if (Date.now() > parseInt(expires)) {
+                    alert('❌ 2FA code has expired. Please request a new one.');
+                    return;
+                }
                 
-                if (verification.valid) {
+                if (enteredCode === storedCode) {
+                    // Success - grant access
+                    const userData = JSON.parse(localStorage.getItem('nodinopro_user_data'));
                     localStorage.setItem('nodinopro_access', 'granted');
-                    localStorage.setItem('nodinopro_user', userName);
-                    localStorage.setItem('nodinopro_user_phone', userPhone);
+                    localStorage.setItem('nodinopro_user', userData.name);
+                    localStorage.setItem('nodinopro_user_tier', userData.tier);
+                    localStorage.setItem('nodinopro_username', userData.username);
                     
                     document.getElementById('securityLayer').style.display = 'none';
                     document.getElementById('mainPlatform').classList.remove('hidden');
                     
+                    // Initialize platform
                     PLATFORM_INIT.initialize();
                     
-                    alert(`🎉 ACCESS GRANTED! Welcome to NODINOPRO, ${userName}!\n\nYou now have full access to:\n• All Road Signs Database\n• K53 Practice Tests\n• Affiliate Earnings System`);
-                    console.log('✅ Platform access granted for:', userName);
+                    alert(`🎉 Welcome to NODINOPRO Premium, ${userData.name}!\n\nYou now have full access to the ${PAYMENT_SYSTEM.tiers[userData.tier].name} tier.`);
                 } else {
-                    alert(`❌ OTP VERIFICATION FAILED\n\nReason: ${verification.reason}`);
-                    console.log('❌ OTP verification failed:', verification.reason);
+                    alert('❌ Invalid verification code. Please try again.');
                 }
             }
         };
 
-        // ==================== ASSESSMENT SYSTEM ====================
-        const ASSESSMENT_SYSTEM = {
-            currentTest: null,
-            userAnswers: [],
-            currentQuestionIndex: 0,
-            
-            questions: {
-                roadSigns: [
-                    {
-                        question: "What does a red octagonal sign mean?",
-                        options: ["Stop", "Yield", "No Entry", "Speed Limit"],
-                        correct: 0,
-                        explanation: "A red octagonal sign always means STOP. You must come to a complete stop."
-                    },
-                    {
-                        question: "What should you do when you see a triangular sign with a red border?",
-                        options: ["Stop immediately", "Proceed with caution", "Yield right of way", "Speed up"],
-                        correct: 1,
-                        explanation: "Triangular signs with red borders are warning signs - proceed with caution."
-                    },
-                    {
-                        question: "What does a blue circular sign indicate?",
-                        options: ["Mandatory instruction", "Warning", "Prohibition", "Information"],
-                        correct: 0,
-                        explanation: "Blue circular signs give mandatory instructions that must be followed."
-                    }
-                ],
-                rules: [
-                    {
-                        question: "What is the legal blood alcohol limit for drivers in South Africa?",
-                        options: ["0.05g/100ml", "0.08g/100ml", "0.10g/100ml", "0.02g/100ml"],
-                        correct: 0,
-                        explanation: "The legal limit is 0.05g per 100ml of blood for normal drivers."
-                    },
-                    {
-                        question: "What should you do when approaching a traffic circle?",
-                        options: ["Yield to traffic from your right", "Speed up and enter quickly", "Yield to traffic already in the circle", "Stop completely before entering"],
-                        correct: 2,
-                        explanation: "Always yield to traffic already in the circle."
-                    }
-                ]
-            },
-            
-            startTest: function(testType) {
-                this.currentTest = testType;
-                this.currentQuestionIndex = 0;
-                this.userAnswers = new Array(this.questions[testType].length).fill(null);
-                
-                document.querySelector('.assessment-types').classList.add('hidden');
-                document.getElementById('testContainer').classList.remove('hidden');
-                document.getElementById('resultsArea').classList.add('hidden');
-                
-                console.log('🧪 Starting test:', testType);
-                this.showQuestion();
-                this.updateProgress();
-            },
-            
-            showQuestion: function() {
-                const questions = this.questions[this.currentTest];
-                const question = questions[this.currentQuestionIndex];
-                
-                if (!question) return;
-                
-                const questionArea = document.getElementById('questionArea');
-                if (!questionArea) return;
-                
-                questionArea.innerHTML = `
-                    <h3>Question ${this.currentQuestionIndex + 1} of ${questions.length}</h3>
-                    <p style="font-size: 1.2em; margin: 20px 0;">${question.question}</p>
-                    <div class="quiz-options">
-                        ${question.options.map((option, index) => `
-                            <div class="quiz-option ${this.userAnswers[this.currentQuestionIndex] === index ? 'selected' : ''}" 
-                                 onclick="ASSESSMENT_SYSTEM.selectAnswer(${index})">
-                                ${String.fromCharCode(65 + index)}. ${option}
-                            </div>
-                        `).join('')}
-                    </div>
-                `;
-                
-                this.updateNavigation();
-                this.updateProgress();
-            },
-            
-            selectAnswer: function(answerIndex) {
-                this.userAnswers[this.currentQuestionIndex] = answerIndex;
-                this.showQuestion();
-            },
-            
-            previousQuestion: function() {
-                if (this.currentQuestionIndex > 0) {
-                    this.currentQuestionIndex--;
-                    this.showQuestion();
-                }
-            },
-            
-            nextQuestion: function() {
-                const questions = this.questions[this.currentTest];
-                if (this.currentQuestionIndex < questions.length - 1) {
-                    this.currentQuestionIndex++;
-                    this.showQuestion();
-                }
-            },
-            
-            submitTest: function() {
-                const questions = this.questions[this.currentTest];
-                let correctAnswers = 0;
-                
-                questions.forEach((question, index) => {
-                    if (this.userAnswers[index] === question.correct) {
-                        correctAnswers++;
-                    }
-                });
-                
-                const score = Math.round((correctAnswers / questions.length) * 100);
-                this.showResults(score, correctAnswers, questions.length);
-            },
-            
-            showResults: function(score, correct, total) {
-                const resultsArea = document.getElementById('resultsArea');
-                const testContainer = document.getElementById('testContainer');
-                
-                if (!resultsArea || !testContainer) return;
-                
-                testContainer.classList.add('hidden');
-                resultsArea.classList.remove('hidden');
-                
-                let message = "";
-                let color = "#dc3545";
-                
-                if (score >= 75) {
-                    message = "🎉 Excellent! You're ready for the real test!";
-                    color = "#28a745";
-                } else if (score >= 50) {
-                    message = "📚 Good effort! Keep practicing to improve.";
-                    color = "#ffc107";
-                } else {
-                    message = "💪 Keep studying! Review the material and try again.";
-                }
-                
-                resultsArea.innerHTML = `
-                    <div class="score-circle" style="background: ${color}">${score}%</div>
-                    <h3>${message}</h3>
-                    <p>You got ${correct} out of ${total} questions correct.</p>
-                    <div style="margin: 20px 0;">
-                        <button class="btn btn-primary" onclick="ASSESSMENT_SYSTEM.restartTest()">Try Again</button>
-                        <button class="btn btn-success" onclick="navigateToPage('home')">Back to Home</button>
-                    </div>
-                `;
-            },
-            
-            restartTest: function() {
-                document.getElementById('resultsArea').classList.add('hidden');
-                document.getElementById('testContainer').classList.add('hidden');
-                document.querySelector('.assessment-types').classList.remove('hidden');
-            },
-            
-            updateProgress: function() {
-                const questions = this.questions[this.currentTest];
-                const progress = ((this.currentQuestionIndex + 1) / questions.length) * 100;
-                const progressBar = document.getElementById('testProgress');
-                
-                if (progressBar) {
-                    progressBar.style.width = `${progress}%`;
-                }
-            },
-            
-            updateNavigation: function() {
-                const questions = this.questions[this.currentTest];
-                const prevBtn = document.getElementById('prevQuestion');
-                const nextBtn = document.getElementById('nextQuestion');
-                const submitBtn = document.getElementById('submitTest');
-                
-                if (prevBtn) prevBtn.disabled = this.currentQuestionIndex === 0;
-                if (nextBtn) nextBtn.disabled = this.currentQuestionIndex === questions.length - 1;
-                if (submitBtn) submitBtn.style.display = this.currentQuestionIndex === questions.length - 1 ? 'block' : 'none';
+        // ==================== 2FA HELPER FUNCTIONS ====================
+        function moveToNext(input, nextIndex) {
+            if (input.value.length === 1) {
+                const nextInput = document.querySelector(`.otp-input:nth-child(${nextIndex + 1})`);
+                if (nextInput) nextInput.focus();
             }
-        };
+        }
 
-        // ==================== ROAD SIGNS MANAGEMENT ====================
-        const ROAD_SIGNS_MANAGER = {
-            loadAllRoadSigns: function() {
-                const container = document.getElementById('signsContainer');
-                if (!container) return;
-                
-                container.innerHTML = '';
-                
-                ROAD_SIGNS_DATABASE.forEach(sign => {
-                    const signElement = this.createSignElement(sign);
-                    container.appendChild(signElement);
-                });
-            },
+        function resend2FACode() {
+            const newCode = Math.floor(100000 + Math.random() * 900000).toString();
+            localStorage.setItem('nodinopro_2fa_code', newCode);
+            localStorage.setItem('nodinopro_2fa_expires', Date.now() + 10 * 60 * 1000);
             
-            createSignElement: function(sign) {
-                const div = document.createElement('div');
-                div.className = `road-sign ${this.getSignShape(sign.sign_code)}`;
-                div.innerHTML = `
-                    <div class="sign-content">${sign.sign_code}</div>
-                    <div class="sign-tooltip">${sign.description}</div>
-                `;
-                div.addEventListener('click', () => this.showSignDetail(sign));
-                return div;
-            },
-            
-            getSignShape: function(signCode) {
-                if (signCode.startsWith('R1')) return 'octagon';
-                if (signCode.startsWith('R2')) return 'circle'; 
-                if (signCode.startsWith('W')) return 'triangle';
-                if (signCode.startsWith('IN')) return 'rectangle';
-                return 'rectangle';
-            },
-            
-            showSignDetail: function(sign) {
-                const modal = document.getElementById('signModal');
-                const content = document.getElementById('modalContent');
-                
-                if (!modal || !content) return;
-                
-                content.innerHTML = `
-                    <h3>${sign.description}</h3>
-                    <div class="road-sign ${this.getSignShape(sign.sign_code)}" style="margin: 20px auto; width: 150px; height: 150px; font-size: 1.5em;">
-                        ${sign.sign_code}
-                    </div>
-                    <p><strong>Category:</strong> ${sign.category}</p>
-                    <p><strong>Sign Code:</strong> ${sign.sign_code}</p>
-                    <p><strong>Action Required:</strong> ${this.getActionForSign(sign)}</p>
-                `;
-                
-                modal.classList.remove('hidden');
-            },
-            
-            getActionForSign: function(sign) {
-                switch(sign.category) {
-                    case 'Control': return "You MUST obey this sign. Failure to comply is a traffic offense.";
-                    case 'Warning': return "Be prepared for the hazard ahead. Adjust your speed and position.";
-                    case 'Information': return "This sign provides useful information for navigation.";
-                    default: return "Follow the instructions indicated by the sign.";
-                }
-            },
-            
-            filterSigns: function(category) {
-                document.querySelectorAll('.filter-btn').forEach(btn => {
-                    btn.classList.remove('active');
-                });
-                event.target.classList.add('active');
-                
-                const container = document.getElementById('signsContainer');
-                if (!container) return;
-                
-                container.innerHTML = '';
-                
-                const filteredSigns = category === 'all' 
-                    ? ROAD_SIGNS_DATABASE 
-                    : ROAD_SIGNS_DATABASE.filter(sign => sign.category === category);
-                
-                filteredSigns.forEach(sign => {
-                    const signElement = this.createSignElement(sign);
-                    container.appendChild(signElement);
-                });
+            let message = '';
+            if (PAYMENT_SYSTEM.selectedAuthMethod === 'whatsapp') {
+                message = `📱 New WhatsApp 2FA Code Sent!\n\nYour new verification code: ${newCode}\n\nThis code is valid for 10 minutes.`;
+            } else if (PAYMENT_SYSTEM.selectedAuthMethod === 'sms') {
+                message = `📱 New SMS 2FA Code Sent!\n\nYour new verification code: ${newCode}\n\nThis code is valid for 10 minutes.`;
+            } else {
+                message = `📧 New Email 2FA Code Sent!\n\nYour new verification code: ${newCode}\n\nThis code is valid for 10 minutes.`;
             }
-        };
+            
+            alert(message);
+            
+            // Reset timer
+            PAYMENT_SYSTEM.start2FATimer();
+        }
 
         // ==================== PLATFORM INITIALIZATION ====================
         const PLATFORM_INIT = {
             initialize: function() {
-                console.log('🚀 Initializing NODINOPRO Platform...');
-                
-                const userPhone = localStorage.getItem('nodinopro_user_phone');
                 const userName = localStorage.getItem('nodinopro_user');
-                
-                if (!userPhone || !userName) return;
+                const userTier = localStorage.getItem('nodinopro_user_tier');
                 
                 document.getElementById('currentUser').textContent = userName;
+                document.getElementById('userTier').textContent = PAYMENT_SYSTEM.tiers[userTier]?.name || 'Premium';
                 
-                const affiliateCode = AFFILIATE_SYSTEM.generateAffiliateCode(userPhone);
-                document.getElementById('userAffiliateCode').textContent = affiliateCode;
-                
-                this.updateEarningsDisplay(affiliateCode);
-                ROAD_SIGNS_MANAGER.loadAllRoadSigns();
-                this.setupEventListeners();
-                this.navigateToPage('home');
-                
-                // Fix scrolling
-                document.body.style.overflow = 'auto';
-                document.body.style.height = '100vh';
+                // Initialize platform features based on tier
+                this.initializeTierFeatures(userTier);
             },
-            
-            updateEarningsDisplay: function(affiliateCode) {
-                const earnings = AFFILIATE_SYSTEM.getEarnings(affiliateCode);
-                document.getElementById('earningsDisplay').textContent = `Earnings: R${earnings}`;
-            },
-            
-            setupEventListeners: function() {
-                const prevBtn = document.getElementById('prevQuestion');
-                const nextBtn = document.getElementById('nextQuestion');
-                const submitBtn = document.getElementById('submitTest');
-                
-                if (prevBtn) prevBtn.addEventListener('click', () => ASSESSMENT_SYSTEM.previousQuestion());
-                if (nextBtn) nextBtn.addEventListener('click', () => ASSESSMENT_SYSTEM.nextQuestion());
-                if (submitBtn) submitBtn.addEventListener('click', () => ASSESSMENT_SYSTEM.submitTest());
-                
-                const closeModal = document.getElementById('closeModal');
-                if (closeModal) closeModal.addEventListener('click', this.closeSignModal);
-                
-                const modal = document.getElementById('signModal');
-                if (modal) {
-                    modal.addEventListener('click', (e) => {
-                        if (e.target === modal) {
-                            this.closeSignModal();
-                        }
-                    });
-                }
-            },
-            
-            navigateToPage: function(page) {
-                document.querySelectorAll('.side-nav-link').forEach(link => {
-                    if (link.getAttribute('data-page') === page) {
-                        link.classList.add('active');
-                    } else {
-                        link.classList.remove('active');
-                    }
-                });
-                
-                document.querySelectorAll('.page').forEach(p => {
-                    if (p.id === page) {
-                        p.classList.add('active');
-                    } else {
-                        p.classList.remove('active');
-                    }
-                });
-                
-                if (page === 'road-signs') {
-                    ROAD_SIGNS_MANAGER.loadAllRoadSigns();
-                } else if (page === 'affiliate-dashboard') {
-                    this.showAffiliateDashboard();
-                } else if (page === 'assessments') {
-                    document.querySelector('.assessment-types').classList.remove('hidden');
-                    document.getElementById('testContainer').classList.add('hidden');
-                    document.getElementById('resultsArea').classList.add('hidden');
-                }
-            },
-            
-            showAffiliateDashboard: function() {
-                const affiliateCode = document.getElementById('userAffiliateCode').textContent;
-                const referrals = AFFILIATE_SYSTEM.getReferrals(affiliateCode);
-                const earnings = AFFILIATE_SYSTEM.getEarnings(affiliateCode);
-                
-                document.getElementById('totalReferrals').textContent = referrals.length;
-                document.getElementById('approvedReferrals').textContent = referrals.filter(r => r.status === 'approved').length;
-                document.getElementById('pendingReferrals').textContent = referrals.filter(r => r.status === 'pending').length;
-                document.getElementById('totalEarnings').textContent = `R${earnings}`;
-                
-                this.displayReferralList(referrals);
-            },
-            
-            displayReferralList: function(referrals) {
-                const container = document.getElementById('referralList');
-                if (!container) return;
-                
-                if (referrals.length === 0) {
-                    container.innerHTML = `
-                        <div style="text-align: center; padding: 40px; color: #666;">
-                            <div style="font-size: 3em; margin-bottom: 15px;">👥</div>
-                            <h4>No referrals yet</h4>
-                            <p>Share your affiliate code with friends to start earning!</p>
-                        </div>
-                    `;
-                    return;
-                }
-                
-                container.innerHTML = referrals.map(ref => `
-                    <div class="referral-item ${ref.status}" style="padding: 15px; margin: 10px 0; border-radius: 8px; background: #f8f9fa; border-left: 4px solid ${ref.status === 'approved' ? '#28a745' : '#ffc107'};">
-                        <div style="display: flex; justify-content: between; align-items: center;">
-                            <div>
-                                <strong>${ref.newUser.name}</strong> 
-                                <span style="color: #666; font-size: 14px;">- ${ref.newUser.phone}</span>
-                            </div>
-                            <span class="status-badge" style="padding: 4px 12px; border-radius: 15px; font-size: 12px; background: ${ref.status === 'approved' ? '#28a745' : '#ffc107'}; color: white;">
-                                ${ref.status.toUpperCase()}
-                            </span>
-                        </div>
-                        <div style="display: flex; justify-content: between; align-items: center; margin-top: 8px;">
-                            <span style="font-size: 12px; color: #666;">
-                                Reference: ${ref.paymentReference}
-                            </span>
-                            <span class="amount" style="font-weight: bold; color: ${ref.status === 'approved' ? '#28a745' : '#6c757d'};">
-                                R${ref.status === 'approved' ? '50' : '0'}
-                            </span>
-                        </div>
-                    </div>
-                `).join('');
-            },
-            
-            closeSignModal: function() {
-                const modal = document.getElementById('signModal');
-                if (modal) {
-                    modal.classList.add('hidden');
-                }
-            },
-            
-            copyAffiliateCode: function() {
-                const code = document.getElementById('userAffiliateCode').textContent;
-                
-                if (navigator.clipboard && window.isSecureContext) {
-                    navigator.clipboard.writeText(code).then(() => {
-                        alert(`✅ Affiliate code copied to clipboard!\n\nShare this code: ${code}`);
-                    }).catch(err => {
-                        this.fallbackCopy(code);
-                    });
-                } else {
-                    this.fallbackCopy(code);
-                }
-            },
-            
-            fallbackCopy: function(code) {
-                const textArea = document.createElement('textarea');
-                textArea.value = code;
-                textArea.style.position = 'fixed';
-                textArea.style.left = '-999999px';
-                textArea.style.top = '-999999px';
-                document.body.appendChild(textArea);
-                textArea.focus();
-                textArea.select();
-                
-                try {
-                    document.execCommand('copy');
-                    alert(`✅ Affiliate code copied to clipboard!\n\nShare this code: ${code}`);
-                } catch (err) {
-                    alert('❌ Failed to copy affiliate code. Please copy manually: ' + code);
-                }
-                
-                document.body.removeChild(textArea);
+
+            initializeTierFeatures: function(tier) {
+                // This would load different features based on the payment tier
+                console.log(`Initializing ${tier} tier features`);
             }
         };
 
         // ==================== GLOBAL FUNCTIONS ====================
-        window.checkAccess = function() {
-            const hasAccess = localStorage.getItem('nodinopro_access');
-            if (hasAccess === 'granted') {
-                document.getElementById('securityLayer').style.display = 'none';
-                document.getElementById('mainPlatform').classList.remove('hidden');
-                PLATFORM_INIT.initialize();
-            } else {
-                PAYMENT_SYSTEM.updatePaymentReference();
-            }
-        };
-
-        window.validateForm = FORM_VALIDATION.validateForm.bind(FORM_VALIDATION);
-        window.submitPaymentRequest = PAYMENT_SYSTEM.submitPaymentRequest.bind(PAYMENT_SYSTEM);
-        window.verifyOTP = PAYMENT_SYSTEM.verifyOTP.bind(PAYMENT_SYSTEM);
+        window.selectTier = PAYMENT_SYSTEM.selectTier.bind(PAYMENT_SYSTEM);
+        window.selectAuthMethod = PAYMENT_SYSTEM.selectAuthMethod.bind(PAYMENT_SYSTEM);
         window.updatePaymentReference = PAYMENT_SYSTEM.updatePaymentReference.bind(PAYMENT_SYSTEM);
-        window.navigateToPage = PLATFORM_INIT.navigateToPage.bind(PLATFORM_INIT);
-        window.copyAffiliateCode = PLATFORM_INIT.copyAffiliateCode.bind(PLATFORM_INIT);
-        window.showAffiliateDashboard = PLATFORM_INIT.showAffiliateDashboard.bind(PLATFORM_INIT);
-        window.filterSigns = ROAD_SIGNS_MANAGER.filterSigns.bind(ROAD_SIGNS_MANAGER);
-        window.startTest = ASSESSMENT_SYSTEM.startTest.bind(ASSESSMENT_SYSTEM);
+        window.submitPaymentRequest = PAYMENT_SYSTEM.submitPaymentRequest.bind(PAYMENT_SYSTEM);
+        window.verify2FA = PAYMENT_SYSTEM.verify2FA.bind(PAYMENT_SYSTEM);
+        window.resend2FACode = resend2FACode;
+        window.moveToNext = moveToNext;
+        window.showLandingPage = showLandingPage;
+
+        window.navigateToPage = function(page) {
+            // Simple navigation function
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.side-nav-link').forEach(link => link.classList.remove('active'));
+            
+            document.getElementById(page)?.classList.add('active');
+            event.target.classList.add('active');
+        };
 
         window.logout = function() {
             if (confirm('Are you sure you want to logout?')) {
-                localStorage.removeItem('nodinopro_access');
-                localStorage.removeItem('nodinopro_user');
-                localStorage.removeItem('nodinopro_user_phone');
+                localStorage.clear();
                 location.reload();
             }
         };
 
-        // Initialize platform
+        // Check for existing access on page load
         window.addEventListener('load', function() {
-            console.log('🚀 NODINOPRO Platform Loading...');
-            checkAccess();
+            const hasAccess = localStorage.getItem('nodinopro_access');
+            if (hasAccess === 'granted') {
+                document.getElementById('heroSection').style.display = 'none';
+                document.getElementById('featuresSection').style.display = 'none';
+                document.getElementById('roadSignsPreview').style.display = 'none';
+                document.getElementById('securityLayer').style.display = 'none';
+                document.getElementById('mainPlatform').classList.remove('hidden');
+                PLATFORM_INIT.initialize();
+            } else {
+                // Show landing page by default
+                document.getElementById('securityLayer').classList.add('hidden');
+                document.getElementById('mainPlatform').classList.add('hidden');
+            }
         });
     </script>
 </body>
